@@ -46,7 +46,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Nhập mức lương..">
+                                            <input type="number" min="0" class="form-control" name="pay" placeholder="Nhập mức lương..">
                                         </div>
 
                                     </div>
@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <input type="number" min="1" class="form-control" placeholder="Số lượng muốn tuyển..">
+                                            <input type="number" min="1" name="number" class="form-control" placeholder="Số lượng muốn tuyển..">
                                         </div>
 
                                     </div>

@@ -45,6 +45,7 @@ Route::middleware('checkEmployer')->prefix('employer')->namespace('Employers')->
     Route::get('recruitments/add',['as' => 'employer.recruitments.add','uses' => 'RecruitmentsController@add']);
     Route::get('/',['as' => 'employer.index.index','uses' => 'IndexController@index']);
     Route::get('new',['as' => 'employer.index.post_new','uses' => 'IndexController@post_new']);
+    Route::post('new',['as' => 'employer.index.post_post_new','uses' => 'IndexController@post_post_new']);
     
     Route::get('{id}',['as' => 'employer.index.index.id','uses' => 'IndexController@index_id']);
     
