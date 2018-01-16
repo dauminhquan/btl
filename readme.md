@@ -3,7 +3,26 @@
 - composer install
 - npm install
 - npm run watch
+
+
+Đổi tên file .env.exam thành .env
+
+chạy lệnh
+
+
+- php artisan key:generate
+
+vào file .env đổi 
+- DB_DATABASE=homestead thành DB_DATABASE=laravel
+
+- DB_USERNAME=homestead thành DB_USERNAME=root
+
+- DB_PASSWORD=secret thành DB_PASSWORD=
+
+Sau đó chạy lệnh
+
 - php artisan serve
+
 
 
 
