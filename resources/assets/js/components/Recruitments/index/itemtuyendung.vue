@@ -30,8 +30,9 @@
                 </div>
             </li>
             <!-- END timeline item -->
-
+            
         </ul>
+        
 </template>
 <script>
     export default {
