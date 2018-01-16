@@ -51,10 +51,12 @@
             tintuyendungmoi () {
                 this.view_index = 0;
                 axios.get('/api/recruitments',{params:{
-                    page: 1
+                    page: 1,
+                    size: 5
                 }})
                     .then((res) => {
                         this.danhsachtintuyendung = res.data.data
+                        console.log(this.danhsachtintuyendung)
 
                     }).catch((err) => {
                     console.log(err)

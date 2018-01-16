@@ -13186,9 +13186,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.view_index = 0;
             axios.get('/api/recruitments', { params: {
-                    page: 1
+                    page: 1,
+                    size: 5
                 } }).then(function (res) {
                 _this.danhsachtintuyendung = res.data.data;
+                console.log(_this.danhsachtintuyendung);
             }).catch(function (err) {
                 console.log(err);
             });

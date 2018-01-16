@@ -16,7 +16,7 @@ class RecruitmentsController
     {
         if($request->has('page'))
         {
-            return RC::join('employers','employers.id','=','recruitments.employer_id')->select(['recruitments.*','employers.name_company'])->orderBy('created_at', 'desc')->paginate(10);
+            return RC::join('employers','employers.id','=','recruitments.employer_id')->select(['recruitments.*','employers.name_company'])->orderBy('created_at', 'desc')->paginate($request->has('size')?$request->size:5);
 
         }
         return RC::join('employers','employers.id','=','recruitments.employer_id')->select(['recruitments.*','employers.name_company'])->orderBy('created_at', 'desc')->get();
