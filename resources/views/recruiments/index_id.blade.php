@@ -36,8 +36,8 @@
                                 <a href="#">{{$data->name_company}}</a>
                                 @if(Auth::guard('employer')->check())
 
-                                    <a href="#" class="pull-right btn-box-tool" title="Xóa bài viết"><i class="fa fa-trash-o"></i></a>
-                                    <a href="#" class="pull-right btn-box-tool" title="Chỉnh sửa bài viết"><i class="fa fa-pencil-square-o"></i></a>
+                                    <a href="#"  class="pull-right btn-box-tool" title="Xóa bài viết"><i class="fa fa-trash-o"></i></a>
+                                    <a href="#" onclick="sua()" class="pull-right btn-box-tool" title="Chỉnh sửa bài viết"><i class="fa fa-pencil-square-o"></i></a>
 
                                 </ul>
 
@@ -50,7 +50,9 @@
                         </div>
                         <hr>
                         <!-- /.user-block -->
+                        <div id="content_re">
                         {!! $data->content !!}
+                        </div> 
                         <hr>
                         <ul class="list-inline">
                             @if(Auth::guard('student')->check())
@@ -83,4 +85,10 @@
 @endsection
 @section('js')
 
+<script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+<script>
+         function sua(){
+            CKEDITOR.replace( 'content_re' );
+        }
+    </script>
 @endsection
