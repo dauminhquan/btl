@@ -15,7 +15,7 @@ class IndexController extends Controller
 
         $data = new Recruitments();
         $data = $data->where('recruitments.id','=',$id)->join('employers','employer_id','=','employers.id')->select('recruitments.*','employers.name_company')->first();
-        return view('recruiments.index_id',['data' => $data]);
+        return view('recruiments.index_id',['data' => $data,'id' => $id]);
     }
 
 

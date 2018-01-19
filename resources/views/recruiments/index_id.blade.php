@@ -29,7 +29,7 @@
             <div class="post2">
                 <div class="active tab-pane" id="activity" >
                     <!-- Post -->
-                    <div class="post" >
+                    <div class="post" id="box-recruitments" pa_data="{{$id}}" @if(Auth::guard('employer')->check()) em_id="{{Auth::guard('employer')->user()->id}}" @endif>
                         <div class="user-block">
                             <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
                             <span class="username">
@@ -37,7 +37,7 @@
                                 @if(Auth::guard('employer')->check())
 
                                     <a href="#"  class="pull-right btn-box-tool" title="Xóa bài viết"><i class="fa fa-trash-o"></i></a>
-                                    <a href="#" onclick="sua()" class="pull-right btn-box-tool" title="Chỉnh sửa bài viết"><i class="fa fa-pencil-square-o"></i></a>
+                                    <a href="#"  @click="sua()" class="pull-right btn-box-tool" title="Chỉnh sửa bài viết"><i class="fa fa-pencil-square-o"></i></a>
 
                                 </ul>
 
@@ -53,6 +53,9 @@
                         <div id="content_re">
                         {!! $data->content !!}
                         </div> 
+                        <br>
+                        <button class="btn btn-success pull-right" v-if="edit == true" @click="getData()">Lưu lại</button>
+                        <div class="clearfix"></div>
                         <hr>
                         <ul class="list-inline">
                             @if(Auth::guard('student')->check())
@@ -85,10 +88,6 @@
 @endsection
 @section('js')
 
-<script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
-<script>
-         function sua(){
-            CKEDITOR.replace( 'content_re' );
-        }
-    </script>
+<script src="//cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
+<script src="{{asset('js/recruiments/index_id.js')}}"></script>
 @endsection

@@ -17,3 +17,4 @@ mix.js('resources/assets/js/app.js', 'public/js')
 mix.js('resources/assets/js/test/test.js', 'public/js');
 mix.js('resources/assets/js/Students/index.js', 'public/js/students');
 mix.js('resources/assets/js/Recruitments/index.js', 'public/js/recruiments').sass('resources/assets/sass/recruitment/index.sass', 'public/css/recruitment');
+mix.js('resources/assets/js/Recruitments/index_id.js', 'public/js/recruiments');

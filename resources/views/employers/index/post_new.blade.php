@@ -112,12 +112,12 @@
 
 @section('js')
 
-<script src="//cdn.ckeditor.com/4.8.0/standard/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
     <script src="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
     <script>
         $(function () {
             //Add text editor
-            CKEDITOR.replace( 'compose-textarea' );
+            CKEDITOR.replace( 'compose-textarea');
         });
     </script>
 
