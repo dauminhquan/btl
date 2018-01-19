@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 14, 2018 lúc 01:03 PM
+-- Thời gian đã tạo: Th1 19, 2018 lúc 08:21 AM
 -- Phiên bản máy phục vụ: 10.1.26-MariaDB
 -- Phiên bản PHP: 7.1.8
 
@@ -46,7 +46,7 @@ CREATE TABLE `employers` (
 --
 
 INSERT INTO `employers` (`id`, `avatar_company`, `name_company`, `address_company`, `email_company`, `phone_number_company`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, '', 'Công ty A', 'HN', 'congtya@gmail.com', '123456', '$2y$10$NaVmybxNDu.JAaZqEGFupuHutEA5utwr.wyp4OPyAtCVtWtnyLfw6', '1i67FiRc4rF4BB6aUXnh0fS7wiwD9LIQ0HTaCu2zJcZ5BU91kgrHFfe4auAA', NULL, NULL),
+(1, '', 'Công ty A', 'HN', 'congtya@gmail.com', '123456', '$2y$10$NaVmybxNDu.JAaZqEGFupuHutEA5utwr.wyp4OPyAtCVtWtnyLfw6', 'AokUevvFOH8kxRoEbtOrLeNfGWIwpxYgRDSU4Q8MIPppR8LzikMnAmvzMvmD', NULL, NULL),
 (2, '', 'Công ty B', 'HN', 'hn@gmail.com', '1234556', 'hn@gmail.com', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -103,16 +103,18 @@ CREATE TABLE `recruitments` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `pay` int(11) UNSIGNED NOT NULL,
-  `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL
+  `title` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `number` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `recruitments`
 --
 
-INSERT INTO `recruitments` (`id`, `content`, `attach_file`, `employer_id`, `created_at`, `updated_at`, `pay`, `title`) VALUES
-(1, 'djasjkdlhsaldhasjkdasaaaaaaaaaaaa <a href=\"#\">File đính kèm</a>\r\n<br>đasadsa\r\n<br>đasadsa\r\n<br>đasadsa\r\n<br>đasadsa\r\n<br>đasadsa\r\n<br>đasadsa\r\n<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa\\', '', 1, NULL, NULL, 0, 'Tuyển dụng PHP developer'),
-(7, '<p>Chào mừng các bạn</p>', 'public/recruitment_attach_file/Nbu5yROH3oW6KbZtPORVJNve0whHA9QiY4ANTSuK.jpeg', 1, '2018-01-07 07:52:43', '2018-01-07 07:52:43', 0, 'Tuyển dụng nhân viên bán hàng');
+INSERT INTO `recruitments` (`id`, `content`, `attach_file`, `employer_id`, `created_at`, `updated_at`, `pay`, `title`, `number`) VALUES
+(1, 'djasjkdlhsaldhasjkdasaaaaaaaaaaaa <a href=\"#\">File đính kèm</a>\r\n<br>đasadsa\r\n<br>đasadsa\r\n<br>đasadsa\r\n<br>đasadsa\r\n<br>đasadsa\r\n<br>đasadsa\r\n<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa<br>đasadsa\\', '', 1, NULL, NULL, 0, 'Tuyển dụng PHP developer', 0),
+(7, '<p>Chào mừng các bạn</p>', 'public/recruitment_attach_file/Nbu5yROH3oW6KbZtPORVJNve0whHA9QiY4ANTSuK.jpeg', 1, '2018-01-07 07:52:43', '2018-01-07 07:52:43', 0, 'Tuyển dụng nhân viên bán hàng', 0),
+(8, '<p style=\"text-align:center\"><span style=\"font-size:24px\"><strong>Tuyển dụng lập tr&igrave;nh vi&ecirc;n PHP</strong></span></p>\n\n<p style=\"margin-left:80px\">Y&ecirc;u cầu:</p>\n\n<ul>\n	<li>Độ tuổi từ 23 đến 28</li>\n	<li>Tốt nghiệp đại học ch&iacute;nh quy</li>\n	<li>C&oacute; kinh nghiệm lập tr&igrave;nh &iacute;t nhất 1 ng&ocirc;n ngữ</li>\n	<li>Y&ecirc;u th&iacute;ch lập tr&igrave;nh</li>\n</ul>\n\n<p>dsadsadsa</p>\n\n<p style=\"margin-left:80px\">Quyền lợi:</p>\n\n<ul>\n	<li>Hưởng lương th&aacute;ng thứ 13</li>\n	<li>Được tổ chức đi chơi v&agrave;o c&aacute;c dịp lễ</li>\n	<li>Cơ hội thăng tiến tốt</li>\n	<li>C&oacute; cơ hội onside đi Nhật,H&agrave;n,Mỹ, Singapo</li>\n	<li>Xin ch&agrave;o c&aacute;c bạn</li>\n</ul>\n\n<p>&nbsp;</p>', 'public/recruitment_attach_file/Fqov5JZqK3g7GfnTGXH9uP6BCtKLOx57VnnZWpSS.docx', 1, '2018-01-17 08:46:13', '2018-01-17 10:00:00', 25, 'Tuyển lập trình viên PHP', 1);
 
 -- --------------------------------------------------------
 
@@ -207,7 +209,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `first_name_student`, `avatar_student`, `last_name_student`, `address_student`, `email_student`, `code`, `phone_number_student`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Quân', '123', 'Đậu', 'HN', 'HN', 'A25428', '123456', '$2y$10$NaVmybxNDu.JAaZqEGFupuHutEA5utwr.wyp4OPyAtCVtWtnyLfw6', 'deJd6hrs0Pk5rAvzQ2X0kXMIMy6kJkO4TisMT7T0Zs81WCyTeglUMaNynnjU', NULL, NULL);
+(1, 'Quân', '123', 'Đậu', 'HN', 'HN', 'A25428', '123456', '$2y$10$NaVmybxNDu.JAaZqEGFupuHutEA5utwr.wyp4OPyAtCVtWtnyLfw6', 'Y4sV9eBQKxHFyc5GQICh7nkFdl1RCCTQ9kab3dqRcyr6FdK8CvPyeuvtkFpx', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -339,7 +341,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `recruitments`
 --
 ALTER TABLE `recruitments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT cho bảng `recruitment_student`
 --
