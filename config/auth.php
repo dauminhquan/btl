@@ -52,6 +52,10 @@ return [
         'employer' => [
             'driver' => 'session',
             'provider' => 'employers',
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
         ]
     ],
 
@@ -84,6 +88,10 @@ return [
         'employers' => [
             'driver' => 'eloquent',
             'model' =>App\Http\Controllers\Auth\Employersauth::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' =>App\Http\Controllers\Auth\Adminauth::class,
         ],
 
 

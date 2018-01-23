@@ -16,6 +16,17 @@ const danhsachtintuyendung = new Vue({
             this.edit = true
           CKEDITOR.replace( 'content_re' );
         },
+        xoa(id){
+            axios.delete(`/api/recruitments/${id}`)
+            .then((res) => {
+                console.log(res)
+                alert('Xóa thành công')
+                // window.location="http://www.vietjack.com"
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        },
         getData(){
             var data = CKEDITOR.instances['content_re'].getData()
             CKEDITOR.instances['content_re'].destroy()
@@ -23,8 +34,7 @@ const danhsachtintuyendung = new Vue({
             var em_id = document.getElementById('box-recruitments')
             
             axios.put(`/api/recruitments/${em_id.attributes.pa_data.value}`,{
-                content: data,
-                employer_id : em_id.attributes.em_id.value
+                content: data
             })
             .then((res) => {
                 console.log(res)

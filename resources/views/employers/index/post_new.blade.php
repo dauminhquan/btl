@@ -10,7 +10,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Gửi CV
+                Đăng tin tuyển dụng
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -31,12 +31,11 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <lable>Chọn ngành muốn tuyển dụng: </lable>
-                                    <select name="company" id="" class="form-control" multiple required>
+                                    <select name="branch_id[]" class="form-control" multiple required>
 
-                                        <option> Khoa học máy tính</option>
-                                        <option> Quản trị kinh doanh</option>
-                                        <option> An toàn thông tin</option>
-                                        <option> Ngôn ngữ Nhật</option>
+                                       @foreach(Branches::get() as $item)
+                                       <option value="{{$item->id}}">{{$item->branch_name}}</option>
+                                       @endforeach
 
                                     </select>
                                 </div>
@@ -52,16 +51,10 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <select name="" id="" class="form-control">
-                                                <option value="">
-                                                    Chọn loại tuyển dụng
-                                                </option>
-                                                <option value="">
-                                                    Thực tập
-                                                </option>
-                                                <option value="">
-                                                    Tuyển nhân viên
-                                                </option>
+                                            <select name="recruitment_type_id" id="" class="form-control">
+                                                @foreach(RecruitmentTypes::get() as $item)
+                                                <option value="{{$item->id}}">{{$item->recruitment_type_name}}</option>
+                                                @endforeach
 
                                             </select>
                                         </div>
@@ -82,7 +75,7 @@
                                 <div class="form-group">
                                     <div class="btn btn-default btn-file">
                                         <i class="fa fa-paperclip"></i> File đính kèm
-                                        <input type="file" name="attachment"  onchange="$('#upload-file-info').html(this.files[0].name)" required>
+                                        <input type="file" name="attachment"  onchange="$('#upload-file-info').html(this.files[0].name)">
                                     </div>
                                     <p class="help-block" id="upload-file-info">Max. 32MB</p>
                                 </div>
@@ -121,12 +114,12 @@
         });
     </script>
 
-    @if(isset($store))
+    @if(isset($success))
         <script type="text/javascript">
             $(function(){
                 var opts = {
                     title: "Thành công",
-                    text: "Gửi CV thành công!",
+                    text: "Gửi bài thành công!",
                     addclass: "stack-topright",
                     type : "success"
                 };

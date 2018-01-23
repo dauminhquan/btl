@@ -10,7 +10,7 @@ Route::resource('student','StudentsController',[
     'except' => ['create','store','edit','destroy']
 ]);
 Route::resource('recruitments','RecruitmentsController',[
-    'only' => ['index','update']
+    'only' => ['index','update','destroy']
 ]);
 /*
 |--------------------------------------------------------------------------

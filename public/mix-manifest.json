@@ -1,9 +1,9 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/css/recruitment/index.css": "/css/recruitment/index.css",
     "/js/recruiments/index.js": "/js/recruiments/index.js",
+    "/js/admin/list_recruitments_wait.js": "/js/admin/list_recruitments_wait.js",
     "/js/students/index.js": "/js/students/index.js",
+    "/css/recruitment/index.css": "/css/recruitment/index.css",
+    "/js/admin/index.js": "/js/admin/index.js",
     "/js/recruiments/index_id.js": "/js/recruiments/index_id.js",
-    "/js/test.js": "/js/test.js"
+    "/js/admin/list_recruitments_wait_id.js": "/js/admin/list_recruitments_wait_id.js"
 }

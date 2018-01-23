@@ -49,6 +49,10 @@ class LoginController extends Controller
         {
             return redirect()->guest(route('employer.index.index'));
         }
+        if(Auth::guard('admin')->check())
+        {
+            return redirect()->guest(route('admin.index'));
+        }
         return view('auth/login');
     }
     public function postindex(Request $request)
@@ -63,6 +67,9 @@ class LoginController extends Controller
                 }
                 if(Auth::guard('employer')->attempt(['email_company' => $request->username, 'password' => $request->password],$request->has('remember'))) {
                     return redirect()->guest(route('employer.index.index'));
+                }
+                if(Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password],$request->has('remember'))) {
+                    return redirect()->guest(route('admin.index'));
                 }
                 return 'tk hoặc mk không chính xác';
             }
@@ -79,6 +86,11 @@ class LoginController extends Controller
         if(Auth::guard('employer')->check())
         {
             Auth::guard('employer')->logout();
+
+        }
+        if(Auth::guard('admin')->check())
+        {
+            Auth::guard('admin')->logout();
 
         }
         return redirect()->guest(route('login'));

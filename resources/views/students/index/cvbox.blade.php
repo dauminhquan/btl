@@ -11,7 +11,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Gửi CV
+                Ứng tuyển
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -36,13 +36,12 @@
                         </div>
                         <div class="box-body no-padding">
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="mailbox.html"><i class="fa fa-inbox"></i> Hộp thứ đến
-                                        <span class="label label-primary pull-right">12</span></a></li>
-                                <li><a href="{{route('student.index.cvbox')}}"><i class="fa fa-envelope-o"></i> Thư đã gửi</a></li>
-                                <li><a href="#"><i class="fa fa-file-text-o"></i> Thư nháp</a></li>
-                                <li><a href="#"><i class="fa fa-filter"></i> Thư rác <span class="label label-warning pull-right">65</span></a>
-                                </li>
-                                <li><a href="#"><i class="fa fa-trash-o"></i> Thư đã xóa</a></li>
+                                <li><a href="{{route('student.index.sendcv')}}"><i class="fa fa-edit"></i>Ứng tuyển</a></li>
+                                <li><a href="#"><i class="fa fa-bullhorn"></i>Thông báo</a></li>
+                                <li><a href="{{route('student.index.cvbox')}}"><i class="fa fa-envelope-o"></i> Các đơn đã gửi</a></li>
+                                <li><a href="#"><i class="fa fa-file-text-o"></i> Đơn nháp</a></li>
+                            
+                                <li><a href="#"><i class="fa fa-trash-o"></i> Đơn đã xóa</a></li>
                             </ul>
                         </div>
                         <!-- /.box-body -->
@@ -73,7 +72,7 @@
                 <div class="col-md-9">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Đơn đã gửi</h3>
+                            <h3 class="box-title">Danh sách đơn đã gửi</h3>
 
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">

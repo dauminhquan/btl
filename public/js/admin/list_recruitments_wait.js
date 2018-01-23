@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 41);
+/******/ 	return __webpack_require__(__webpack_require__.s = 58);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -13369,14 +13369,31 @@ module.exports = function listToStyles (parentId, list) {
 /* 38 */,
 /* 39 */,
 /* 40 */,
-/* 41 */
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(42);
+module.exports = __webpack_require__(59);
 
 
 /***/ }),
-/* 42 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -13384,25 +13401,25 @@ window.Vue = __webpack_require__(9);
 
 window.axios = __webpack_require__(12);
 
-Vue.component('danh-sach-tin-tuyen-dung', __webpack_require__(43));
+Vue.component('danh-sach-dang-cho', __webpack_require__(60));
 var danhsachtintuyendung = new Vue({
-    el: '#timeline'
+    el: '#danhsachtindangchoduyet'
 });
 
 /***/ }),
-/* 43 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(44)
+  __webpack_require__(61)
 }
 var normalizeComponent = __webpack_require__(31)
 /* script */
-var __vue_script__ = __webpack_require__(46)
+var __vue_script__ = __webpack_require__(63)
 /* template */
-var __vue_template__ = __webpack_require__(50)
+var __vue_template__ = __webpack_require__(67)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -13419,7 +13436,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Recruitments\\index\\danhsachtintuyendung.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Admin\\danhsachtintuyendungchoduyet.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -13428,9 +13445,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1cf17f78", Component.options)
+    hotAPI.createRecord("data-v-8b565826", Component.options)
   } else {
-    hotAPI.reload("data-v-1cf17f78", Component.options)
+    hotAPI.reload("data-v-8b565826", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -13441,23 +13458,23 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 44 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(45);
+var content = __webpack_require__(62);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(33)("7ccd5ed7", content, false);
+var update = __webpack_require__(33)("013b46f0", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1cf17f78\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./danhsachtintuyendung.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1cf17f78\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./danhsachtintuyendung.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8b565826\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./danhsachtintuyendungchoduyet.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8b565826\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./danhsachtintuyendungchoduyet.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -13467,7 +13484,7 @@ if(false) {
 }
 
 /***/ }),
-/* 45 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(32)(undefined);
@@ -13481,13 +13498,13 @@ exports.push([module.i, "\n.center{\r\n    margin-left: 48%;\n}\r\n", ""]);
 
 
 /***/ }),
-/* 46 */
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__itemtuyendung_vue__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__itemtuyendung_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__itemtuyendung_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__itemtintuyendung_vue__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__itemtintuyendung_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__itemtintuyendung_vue__);
 //
 //
 //
@@ -13504,7 +13521,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     components: {
-        'tin-tuyen-dung-item': __WEBPACK_IMPORTED_MODULE_0__itemtuyendung_vue___default.a
+        'tin-tuyen-dung-item': __WEBPACK_IMPORTED_MODULE_0__itemtintuyendung_vue___default.a
     },
 
     data: function data() {
@@ -13528,7 +13545,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             this.view_index = 0;
-            axios.get('/api/recruitments', {
+            axios.get('/api/admin/recruitments/wait', {
                 params: {
                     page: this.page,
                     size: this.size
@@ -13549,7 +13566,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return false;
             }
             this.page++;
-            axios.get('/api/recruitments', {
+            axios.get('/api/admin/recruitments/wait', {
                 params: {
                     page: this.page,
                     size: this.size
@@ -13567,15 +13584,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 47 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(31)
 /* script */
-var __vue_script__ = __webpack_require__(48)
+var __vue_script__ = __webpack_require__(65)
 /* template */
-var __vue_template__ = __webpack_require__(49)
+var __vue_template__ = __webpack_require__(66)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -13592,7 +13609,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Recruitments\\index\\itemtuyendung.vue"
+Component.options.__file = "resources\\assets\\js\\components\\Admin\\itemtintuyendung.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -13601,9 +13618,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a73dd200", Component.options)
+    hotAPI.createRecord("data-v-7df356ee", Component.options)
   } else {
-    hotAPI.reload("data-v-a73dd200", Component.options)
+    hotAPI.reload("data-v-7df356ee", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -13614,11 +13631,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 48 */
+/* 65 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -13697,7 +13715,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 49 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -13784,21 +13802,13 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
-          _vm.employer == 1
-            ? _c(
-                "a",
-                {
-                  staticClass: "btn btn-success btn-xs",
-                  attrs: {
-                    href:
-                      _vm.url +
-                      "/student/sendcv?company=" +
-                      _vm.tintuyendung.employer_id
-                  }
-                },
-                [_vm._v("Nộp hồ sơ")]
-              )
-            : _vm._e(),
+          _c("a", { staticClass: "btn btn-success btn-xs" }, [
+            _vm._v("Duyệt tin")
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "btn btn-danger btn-xs" }, [
+            _vm._v("Hủy tin")
+          ]),
           _vm._v(" "),
           _vm.xemchitiet
             ? _c(
@@ -13806,7 +13816,10 @@ var render = function() {
                 {
                   staticClass: "btn btn-link btn-xs",
                   attrs: {
-                    href: _vm.url + "/recruitments/" + _vm.tintuyendung.id
+                    href:
+                      _vm.url +
+                      "/admin/recruitments/wait/" +
+                      _vm.tintuyendung.id
                   }
                 },
                 [_vm._v("Xem chí tiết")]
@@ -13823,12 +13836,12 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-a73dd200", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7df356ee", module.exports)
   }
 }
 
 /***/ }),
-/* 50 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -13841,7 +13854,7 @@ var render = function() {
       _vm._l(_vm.danhsachtintuyendung, function(tintuyendung) {
         return _c("tin-tuyen-dung-item", {
           key: tintuyendung.id,
-          attrs: { employer: _vm.employer, tintuyendung: tintuyendung }
+          attrs: { tintuyendung: tintuyendung }
         })
       }),
       _vm._v(" "),
@@ -13869,7 +13882,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1cf17f78", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-8b565826", module.exports)
   }
 }
 

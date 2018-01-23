@@ -21,6 +21,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/pnotify.custom.min.css')}}">
+    
 
 
 
@@ -151,6 +152,10 @@
                                 {
                                     echo Auth::guard('employer')->user()->name_company;
                                 }
+                                if(Auth::guard('admin')->check())
+                                {
+                                    echo Auth::guard('admin')->user()->first_name.' '.Auth::guard('admin')->user()->last_name;;
+                                }
 
                                 ?>
 
@@ -187,6 +192,7 @@
                                     <a href="{{route('logout')}}" class="btn btn-default btn-flat">Đăng xuất</a>
                                 </div>
                             </li>
+                            
                         </ul>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
@@ -221,7 +227,10 @@
                         {
                             echo Auth::guard('employer')->user()->name_company;
                         }
-
+                        if(Auth::guard('admin')->check())
+                        {
+                            echo Auth::guard('admin')->user()->first_name.' '.Auth::guard('admin')->user()->last_name;;
+                        }
                         ?>
                     </p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
@@ -230,7 +239,7 @@
             <!-- search form -->
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <input type="text" name="q" class="form-control" placeholder="Tìm kiếm tuyển dụng ...">
                     <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -258,13 +267,13 @@
                     </a>
 
                 </li>
-                <li >
+                
+                <li class="treeview">
                     <a href="#">
-                        <span>Thông tin cá nhân</span>
-                        <span class="pull-right-container">
-            </span>
+                        <i class="fa fa-comments"></i>
+                        <span>Tin nhắn</span>
+                        
                     </a>
-
                 </li>
                 @if(Auth::guard('student')->check())
 
@@ -306,19 +315,7 @@
                         <li><a href="#"><i class="fa fa-circle-o"></i> Đăng ký xét tốt nghiệp</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-edit"></i> <span>Thông báo</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Tin nhắn</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Thông báo toàn trường</a></li>
-
-                    </ul>
-                </li>
+                
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-table"></i> <span>Tuyển dụng</span>
@@ -328,26 +325,20 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{route('recruitments.index')}}"><i class="fa fa-circle-o"></i> Xem tất cả tin tuyển dụng</a></li>
-                        <li><a href="{{route('student.index.sendcv')}}"><i class="fa fa-circle-o"></i> Gửi CV</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-table"></i> <span>Email</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{route('student.index.sendcv')}}"><i class="fa fa-circle-o"></i> Gửi email</a></li>
-                        <li><a href="{{route('student.index.cvbox')}}"><i class="fa fa-circle-o"></i> Hộp thư đến</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Thùng rác</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Spam</a></li>
+                        <li><a href="{{route('student.index.sendcv')}}"><i class="fa fa-circle-o"></i> Ứng tuyển</a></li>
+                        <li><a href="{{route('student.index.cvbox')}}"><i class="fa fa-circle-o"></i> Quản lý đơn ứng tuyển</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Xem thông báo</a></li>
                     </ul>
                 </li>
                     @endif
                 @if(Auth::guard('employer')->check())
-
+                    <li >
+                        <a href="#">
+                            <i class="fa fa-bell-o"></i>
+                            <span>Thông báo từ nhà trường</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-pie-chart"></i>
@@ -357,25 +348,110 @@
                         </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Xem tất cả tuyển dụng</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Tất cả bài đăng của bạn</a></li>
+                            <li><a href="{{route('recruitments.index')}}"><i class="fa fa-circle-o"></i> Xem tất cả tuyển dụng</a></li>
                             <li><a href="{{route('employer.index.post_new')}}"><i class="fa fa-circle-o"></i> Tạo mới tuyển dụng</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-table"></i> <span>Email</span>
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Ứng tuyển</span>
                             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Gửi email</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Hộp thư đến</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Thùng rác</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Spam</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Xem các đơn ứng tuyển</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Hẹn phỏng vấn</a></li>
                         </ul>
                     </li>
+                    
                 @endif
+                @if(!Auth::guard('admin')->check())         
+                <li >
+                    <a href="#">
+                        <i class="fa fa-table"></i>
+                        <span>Hỗ trợ</span>
+                        <span class="pull-right-container">
+                        </span>
+                    </a>
+
+                </li>
+                @endif
+                @if(Auth::guard('admin')->check()) 
+                <li class="treeview">
+                        <a href="#">
+                            <i class="fa  fa-list-alt"></i>
+                            <span>Quản lý bài đăng</span>
+                            <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{route('recruitments.index')}}"><i class="fa fa-circle-o"></i> Xem tất cả bài đăng</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Các bài đăng đợi duyệt</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-bookmark-o"></i>
+                            <span>Quản lý thông báo</span>
+                            <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{route('recruitments.index')}}"><i class="fa fa-circle-o"></i> Tạo mới thông báo</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Danh sách thông báo đã gửi</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-building-o"></i>
+                        <span>Quản lý doanh nghiệp</span>
+                        <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('recruitments.index')}}"><i class="fa fa-circle-o"></i> Danh sách doanh nghiệp</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Thêm mới doanh nghiệp</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-pie-chart"></i>
+                            <span>Thống kê tuyển dụng</span>
+                            <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{route('recruitments.index')}}"><i class="fa fa-circle-o"></i> Thống kê lượng tuyển dụng</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Thống kê lượng ứng tuyển</a></li>
+                        </ul>
+                    </li>
+                <li >
+                        <a href="#">
+                            <i class="fa fa-bell-o"></i>
+                            <span>Các thư hỗ trợ</span>
+                            <span class="pull-right-container"></span>
+                        </a>
+                    </li>
+
+                @endif
+                <li >
+                    <a href="#">
+                        <i class="fa fa-gears"></i>
+                        <span>Thông tin cá nhân</span>
+                        <span class="pull-right-container">
+            </span>
+                    </a>
+
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -392,7 +468,7 @@
         <div class="pull-right hidden-xs">
             <b>Version</b> 2.4.0
         </div>
-        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+        <strong>Copyright &copy; 2017-2018 <a href="https://facebook.com/toi.cam.7">Thang Long University</a>.</strong> All rights
         reserved.
     </footer>
 
@@ -606,7 +682,7 @@
 @show
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
-<script src="{{asset('js/pnotify.custom.min.js')}}"></script>
+<script src="{{asset('js/pnotify.min.js')}}"></script>
 <script>
     jQuery(document).ready(function($) {
         var url = window.location

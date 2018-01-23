@@ -4,6 +4,7 @@ use App\Employers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Recruitments;
+use App\BranchRecruitment;
 use Illuminate\Support\Facades\Auth;
 class IndexController extends Controller
 {
@@ -23,9 +24,20 @@ class IndexController extends Controller
         $tuyendung->title = $request->title;
         $tuyendung->number = $request->number;
         $tuyendung->pay = $request->pay;
-        $tuyendung->attach_file = $request->file('attachment')->store('public/recruitment_attach_file');
+        if($request->hasFile('attachment'))
+        {
+            $tuyendung->attach_file = $request->file('attachment')->store('public/recruitment_attach_file');
+        }
         $tuyendung->employer_id = Auth::guard('employer')->user()->id;
+        $tuyendung->recruitment_type_id = $request->recruitment_type_id;
         $tuyendung->save();
+        foreach($request->branch_id as $item)
+        {
+            $rrt = new BranchRecruitment();
+            $rrt->branch_id = $item;
+            $rrt->recruitments_id = $tuyendung->id;
+            $rrt->save();
+        }
         return view('employers.index.post_new',['success' => true]);
     }
     public function index_id($id)

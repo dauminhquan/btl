@@ -52,7 +52,15 @@ Route::middleware('checkEmployer')->prefix('employer')->namespace('Employers')->
 
 });
 
+Route::middleware('checkAdmin')->prefix('admin')->namespace('Admin')->group(function(){
+    Route::get('/',['as' => 'admin.index','uses' => 'IndexController@index']);
+    Route::get('/recruitments/wait',['as' => 'admin.recruitments.wait','uses' => 'IndexController@recruitments_wait']);
+    Route::get('/recruitments/wait/{id}',['as' => 'admin.recruitments.wait.id','uses' => 'IndexController@recruitments_wait_id']);
+    
+});
 
+Route::get('api/admin/recruitments/wait',['as' => "api.admin.recruitments.wait",'uses' => 'ApiController@recruitments_wait']);
+Route::post('api/admin/recruitments/report',['as' => "api.admin.recruitments.report",'uses' => 'ApiController@recruitments_report']);
 
 ///students
 /// Route::get('student/recruitments',['as' => 'student.recruitments.index','uses' => 'Students\RecruitmentsController@index']);

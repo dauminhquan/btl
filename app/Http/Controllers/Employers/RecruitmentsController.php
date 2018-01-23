@@ -29,13 +29,7 @@ class RecruitmentsController extends Controller
     
     public function postadd(Request $request)
     {
-        $rc = new RC();
-        $rc->content = $request->input('content');
-        $file = $request->file('attach_file');
-        $rc->attach_file = $file->store('public/recruitment_attach_file');
-        $rc->employer_id = Auth::guard('employer')->user()->id;
-        $rc->save();
-        return $rc;
+        
     }
     
     /**
@@ -69,12 +63,7 @@ class RecruitmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $task = Task::findOrFail($id);
-        $task->completed = $request->completed;
-        $task->update();
-
-
-        return $task;
+       
     }
 
     /**
@@ -85,10 +74,6 @@ class RecruitmentsController extends Controller
      */
     public function destroy($id)
     {
-        $task = Task::findOrFail($id);
-        $task->delete();
-
         
-        return 204;
     }
 }

@@ -1,12 +1,12 @@
 <template>
     <div>
-        <tin-tuyen-dung-item :employer="employer" v-for="tintuyendung in danhsachtintuyendung" :key="tintuyendung.id" :tintuyendung="tintuyendung"></tin-tuyen-dung-item>
+        <tin-tuyen-dung-item  v-for="tintuyendung in danhsachtintuyendung" :key="tintuyendung.id" :tintuyendung="tintuyendung"></tin-tuyen-dung-item>
         <button class="btn btn-info center" v-if="end == false" @click="more_info()">Xem thêm</button>
     </div>
 </template>
 
 <script>
-    import item_tuyen_dung from './itemtuyendung.vue'
+    import item_tuyen_dung from './itemtintuyendung.vue'
     export default {
         mounted() {//hàm tự động chạy khi khởi chạy
             this.tintuyendungmoi()
@@ -36,7 +36,7 @@
         methods: {
             tintuyendungmoi () {
                 this.view_index = 0;
-                axios.get('/api/recruitments',{
+                axios.get('/api/admin/recruitments/wait',{
                     params: {
                         page: this.page,
                         size: this.size
@@ -59,7 +59,7 @@
                     return false;
                 }
                 this.page++;
-                axios.get('/api/recruitments',{
+                axios.get('/api/admin/recruitments/wait',{
                     params: {
                         page: this.page,
                         size: this.size

@@ -15,8 +15,8 @@
             </ol>
         </section>
         <section class="content">
-            <div id="timeline">
-                <danh-sach-tin-tuyen-dung @if(Auth::guard('student')->check()) :employer="1" @endif></danh-sach-tin-tuyen-dung>
+            <div id="danhsachtindangchoduyet">
+            <danh-sach-dang-cho></danh-sach-dang-cho>
             </div>
             
         </section>
@@ -24,5 +24,5 @@
 
 @endsection
 @section('js')
-<script src="{{asset('js/recruiments/index.js')}}"></script>
+<script src="{{asset('js/admin/list_recruitments_wait.js')}}"></script>
 @endsection

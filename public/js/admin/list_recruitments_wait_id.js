@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 41);
+/******/ 	return __webpack_require__(__webpack_require__.s = 68);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -12918,465 +12918,51 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 31 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
-}
-
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-var listToStyles = __webpack_require__(34)
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-module.exports = function (parentId, list, _isProduction) {
-  isProduction = _isProduction
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
-        }
-        delete stylesInDom[domStyle.id]
-      }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports) {
-
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-module.exports = function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-
-/***/ }),
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
 /* 35 */,
 /* 36 */,
 /* 37 */,
 /* 38 */,
 /* 39 */,
 /* 40 */,
-/* 41 */
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(42);
+module.exports = __webpack_require__(69);
 
 
 /***/ }),
-/* 42 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -13384,494 +12970,86 @@ window.Vue = __webpack_require__(9);
 
 window.axios = __webpack_require__(12);
 
-Vue.component('danh-sach-tin-tuyen-dung', __webpack_require__(43));
 var danhsachtintuyendung = new Vue({
-    el: '#timeline'
-});
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(44)
-}
-var normalizeComponent = __webpack_require__(31)
-/* script */
-var __vue_script__ = __webpack_require__(46)
-/* template */
-var __vue_template__ = __webpack_require__(50)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\Recruitments\\index\\danhsachtintuyendung.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1cf17f78", Component.options)
-  } else {
-    hotAPI.reload("data-v-1cf17f78", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(45);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(33)("7ccd5ed7", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1cf17f78\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./danhsachtintuyendung.vue", function() {
-     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1cf17f78\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./danhsachtintuyendung.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(32)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n.center{\r\n    margin-left: 48%;\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 46 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__itemtuyendung_vue__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__itemtuyendung_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__itemtuyendung_vue__);
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        //hàm tự động chạy khi khởi chạy
-        this.tintuyendungmoi();
-    },
-
-    components: {
-        'tin-tuyen-dung-item': __WEBPACK_IMPORTED_MODULE_0__itemtuyendung_vue___default.a
-    },
-
+    el: '#box-recruitments',
     data: function data() {
-
         return {
-            danhsachtintuyendung: [],
-            tintuyendung: {},
-            url: window.location.origin,
-            style_xem_them: {},
-            size: 10,
-            page: 1,
-            end: false
-
+            edit: false,
+            report: ''
         };
     },
 
-    props: ['employer'],
 
     methods: {
-        tintuyendungmoi: function tintuyendungmoi() {
-            var _this = this;
-
-            this.view_index = 0;
-            axios.get('/api/recruitments', {
-                params: {
-                    page: this.page,
-                    size: this.size
-                }
-            }).then(function (res) {
-                if (res.data.data.length < _this.size) {
-                    _this.end = true;
-                }
-                _this.danhsachtintuyendung = res.data.data;
+        sua: function sua() {
+            this.edit = true;
+            CKEDITOR.replace('content_re');
+        },
+        xoa: function xoa(id) {
+            axios.delete('/api/recruitments/' + id).then(function (res) {
+                console.log(res);
+                alert('Xóa thành công');
+                // window.location="http://www.vietjack.com"
             }).catch(function (err) {
                 console.log(err);
             });
         },
-        more_info: function more_info() {
-            var _this2 = this;
-
-            if (this.end == true) {
-                return false;
-            }
-            this.page++;
-            axios.get('/api/recruitments', {
-                params: {
-                    page: this.page,
-                    size: this.size
-                }
+        duyettin: function duyettin(id) {
+            axios.put('/api/recruitments/' + id, {
+                success: true
             }).then(function (res) {
-                if (res.data.data.length == 0) {
-                    _this2.end = true;
-                }
-                _this2.danhsachtintuyendung = _this2.danhsachtintuyendung.concat(res.data.data);
+                console.log(res);
+                alert('Duyệt tin thành công');
+            }).catch(function (err) {
+                console.log(err);
+            });
+        },
+        huybaiviet: function huybaiviet(id) {
+            // this.xoa(id)
+            axios.put('/api/recruitments/' + id, {
+                success: false
+            }).then(function (res) {
+                console.log(res);
+                alert('Duyệt tin thành công');
+            }).catch(function (err) {
+                console.log(err);
+            });
+            axios.post('/api/admin/recruitments/report', {
+                e_id: parseInt(document.getElementById('box-recruitments').attributes.em_id.value),
+                re_id: id,
+                report: this.report
+            }).then(function (res) {
+                console.log(res);
+                alert('Hủy tin thành công');
+            }).catch(function (err) {
+                console.log(err);
+            });
+        },
+        getData: function getData(id) {
+            var data = CKEDITOR.instances['content_re'].getData();
+            CKEDITOR.instances['content_re'].destroy();
+            this.edit = false;
+            var em_id = document.getElementById('box-recruitments');
+
+            axios.put('/api/recruitments/' + id, {
+                content: data
+            }).then(function (res) {
+                console.log(res);
+                var opts = {
+                    title: "Thành công",
+                    text: "Sửa nội dung tin thành công!",
+                    addclass: 'bg-primary',
+                    type: "success"
+                };
+
+                new PNotify(opts);
+                console.log('task updated');
             }).catch(function (err) {
                 console.log(err);
             });
         }
     }
 });
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(31)
-/* script */
-var __vue_script__ = __webpack_require__(48)
-/* template */
-var __vue_template__ = __webpack_require__(49)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\Recruitments\\index\\itemtuyendung.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a73dd200", Component.options)
-  } else {
-    hotAPI.reload("data-v-a73dd200", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 48 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-
-        return {
-            xemchitiet: false,
-            url: window.location.origin,
-            style_xem_them: {}
-
-        };
-    },
-
-    props: ['tintuyendung', 'employer'],
-
-    methods: {
-        getDayCreated: function getDayCreated(date_cr) {
-            console.log(this.employer);
-            var date = new Date(date_cr);
-            var m = parseInt(date.getMonth()) + 1;
-            return date.getDate() + '.' + m + '.' + date.getFullYear();
-        },
-        getTimeCreated: function getTimeCreated(date_cr) {
-            var date = new Date(date_cr);
-            return date.getHours() + ':' + date.getSeconds();
-        },
-        xem_them: function xem_them(item) {
-            if (this.xemchitiet == true) {
-                this.xemchitiet = false;
-                this.style_xem_them = {
-                    maxHeight: '100px'
-                };
-            } else {
-                this.xemchitiet = true;
-                this.style_xem_them = {
-                    maxHeight: '500px'
-                };
-            }
-        }
-    }
-});
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("ul", { staticClass: "timeline timeline-inverse" }, [
-    _c("li", { staticClass: "time-label" }, [
-      _c("span", { staticClass: "bg-red" }, [
-        _vm._v(
-          "\n                  " +
-            _vm._s(_vm.getDayCreated(_vm.tintuyendung.created_at)) +
-            "\n                "
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("li", [
-      _c("i", { staticClass: "fa fa-envelope bg-blue" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "timeline-item" }, [
-        _c("span", { staticClass: "time" }, [
-          _c("i", { staticClass: "fa fa-clock-o" }),
-          _vm._v(" " + _vm._s(_vm.getTimeCreated(_vm.tintuyendung.created_at)))
-        ]),
-        _vm._v(" "),
-        _c("h3", { staticClass: "timeline-header" }, [
-          _c(
-            "a",
-            {
-              attrs: {
-                href: _vm.url + "/employer" + "/" + _vm.tintuyendung.employer_id
-              }
-            },
-            [_vm._v(_vm._s(_vm.tintuyendung.name_company))]
-          ),
-          _c(
-            "a",
-            {
-              attrs: { href: _vm.url + "/recruitments/" + _vm.tintuyendung.id }
-            },
-            [
-              _c("span", { staticClass: "title-recruitment" }, [
-                _vm._v("  " + _vm._s(_vm.tintuyendung.title))
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", {
-          staticClass: "timeline-body",
-          style: _vm.style_xem_them,
-          domProps: { innerHTML: _vm._s(_vm.tintuyendung.content) }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "timeline-footer" }, [
-          !_vm.xemchitiet
-            ? _c(
-                "a",
-                {
-                  staticClass: "btn btn-primary btn-xs",
-                  on: {
-                    click: function($event) {
-                      _vm.xem_them(this)
-                    }
-                  }
-                },
-                [_vm._v("Xem thêm")]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.xemchitiet
-            ? _c(
-                "a",
-                {
-                  staticClass: "btn btn-danger btn-xs",
-                  on: {
-                    click: function($event) {
-                      _vm.xem_them(this)
-                    }
-                  }
-                },
-                [_vm._v("Thu nhỏ")]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.employer == 1
-            ? _c(
-                "a",
-                {
-                  staticClass: "btn btn-success btn-xs",
-                  attrs: {
-                    href:
-                      _vm.url +
-                      "/student/sendcv?company=" +
-                      _vm.tintuyendung.employer_id
-                  }
-                },
-                [_vm._v("Nộp hồ sơ")]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.xemchitiet
-            ? _c(
-                "a",
-                {
-                  staticClass: "btn btn-link btn-xs",
-                  attrs: {
-                    href: _vm.url + "/recruitments/" + _vm.tintuyendung.id
-                  }
-                },
-                [_vm._v("Xem chí tiết")]
-              )
-            : _vm._e()
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-a73dd200", module.exports)
-  }
-}
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm._l(_vm.danhsachtintuyendung, function(tintuyendung) {
-        return _c("tin-tuyen-dung-item", {
-          key: tintuyendung.id,
-          attrs: { employer: _vm.employer, tintuyendung: tintuyendung }
-        })
-      }),
-      _vm._v(" "),
-      _vm.end == false
-        ? _c(
-            "button",
-            {
-              staticClass: "btn btn-info center",
-              on: {
-                click: function($event) {
-                  _vm.more_info()
-                }
-              }
-            },
-            [_vm._v("Xem thêm")]
-          )
-        : _vm._e()
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1cf17f78", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);

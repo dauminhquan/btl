@@ -4,7 +4,7 @@
             <ul class="products-list product-list-in-box">
                 <li class="item" v-for="tintuyendung in danhsachtintuyendung" :key="tintuyendung.id">
                     <div class="product-img">
-                        <a :href="url+'/recruitments/'+tintuyendung.id"><img src="dist/img/default-50x50.gif" alt="Product Image"></a>
+                        <a :href="url+'/admin/recruitments/wait/'+tintuyendung.id"><img src="dist/img/default-50x50.gif" alt="Product Image"></a>
                     </div>
                     <div class="product-info">
 
@@ -12,7 +12,7 @@
                         <a :href="url + '/employer'+'/'+tintuyendung.employer_id" class="product-title">{{tintuyendung.name_company}}
                           </a>
                         <span class="product-description">
-                            {{tintuyendung.title}}
+                            <a :href="url+'/admin/recruitments/wait/'+tintuyendung.id">{{tintuyendung.title}}</a>
                         </span>
                         <span class="product-description">
                              Loại: {{tintuyendung.recruitment_type_name}}
@@ -31,7 +31,7 @@
 <script>
     export default {
         mounted() {//hàm tự động chạy khi khởi chạy
-            this.tintuyendungmoi()
+            this.tintuyendangcho()
         },
         computed:{
 
@@ -48,9 +48,9 @@
         props:[]
         ,
         methods: {
-            tintuyendungmoi () {
+            tintuyendangcho () {
                 this.view_index = 0;
-                axios.get('/api/recruitments',{params:{
+                axios.get('/api/admin/recruitments/wait',{params:{
                     page: 1,
                     size: 5
                 }})

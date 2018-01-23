@@ -24,8 +24,9 @@
                     <div class="timeline-footer">
                         <a class="btn btn-primary btn-xs" v-if="!xemchitiet" @click="xem_them(this)">Xem thêm</a>
                         <a class="btn btn-danger btn-xs" v-if="xemchitiet" @click="xem_them(this)">Thu nhỏ</a>
-                        <a v-if="employer == 1" :href="url+'/student/sendcv?company='+tintuyendung.employer_id" class="btn btn-success btn-xs">Nộp hồ sơ</a>
-                        <a v-if="xemchitiet" :href="url+ '/recruitments/'+tintuyendung.id" class="btn btn-link btn-xs">Xem chí tiết</a>
+                        <a   class="btn btn-success btn-xs">Duyệt tin</a>
+                        <a   class="btn btn-danger btn-xs">Hủy tin</a>
+                        <a v-if="xemchitiet" :href="url+ '/admin/recruitments/wait/'+tintuyendung.id" class="btn btn-link btn-xs">Xem chí tiết</a>
                     </div>
                 </div>
             </li>
