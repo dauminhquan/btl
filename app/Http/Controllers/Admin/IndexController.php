@@ -30,4 +30,8 @@ class IndexController extends Controller
         return view('admin.recruitments_wait_id',['data' => $data,'id' => $id,'data_branches'=> $data_branches]);
        
     }
+    public function cacbaidangdoiduyet()
+    {
+        return view('template.cacbaidangdoiduyet');
+    }
 }

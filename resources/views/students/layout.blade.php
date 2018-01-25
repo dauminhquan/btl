@@ -327,13 +327,13 @@
                         <li><a href="{{route('recruitments.index')}}"><i class="fa fa-circle-o"></i> Xem tất cả tin tuyển dụng</a></li>
                         <li><a href="{{route('student.index.sendcv')}}"><i class="fa fa-circle-o"></i> Ứng tuyển</a></li>
                         <li><a href="{{route('student.index.cvbox')}}"><i class="fa fa-circle-o"></i> Quản lý đơn ứng tuyển</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Xem thông báo</a></li>
+                        <li><a href="{{route('student.index.thongbao')}}"><i class="fa fa-circle-o"></i> Xem thông báo</a></li>
                     </ul>
                 </li>
                     @endif
                 @if(Auth::guard('employer')->check())
                     <li >
-                        <a href="#">
+                        <a href="{{route('employer.index.thongbaotunhatruong')}}">
                             <i class="fa fa-bell-o"></i>
                             <span>Thông báo từ nhà trường</span>
                             <span class="pull-right-container"></span>
@@ -348,7 +348,7 @@
                         </span>
                         </a>
                         <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Tất cả bài đăng của bạn</a></li>
+                        <li><a href="{{route('employer.index.quanlybaidang')}}"><i class="fa fa-circle-o"></i> Tất cả bài đăng của bạn</a></li>
                             <li><a href="{{route('recruitments.index')}}"><i class="fa fa-circle-o"></i> Xem tất cả tuyển dụng</a></li>
                             <li><a href="{{route('employer.index.post_new')}}"><i class="fa fa-circle-o"></i> Tạo mới tuyển dụng</a></li>
                         </ul>
@@ -362,8 +362,8 @@
                         </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Xem các đơn ứng tuyển</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Hẹn phỏng vấn</a></li>
+                            <li><a href="{{route('employer.index.xemtatcadonungtuyen')}}"><i class="fa fa-circle-o"></i> Xem các đơn ứng tuyển</a></li>
+                            <li><a href="{{route('employer.index.henphongvan')}}"><i class="fa fa-circle-o"></i> Hẹn phỏng vấn</a></li>
                         </ul>
                     </li>
                     
@@ -390,7 +390,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="{{route('recruitments.index')}}"><i class="fa fa-circle-o"></i> Xem tất cả bài đăng</a></li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Các bài đăng đợi duyệt</a></li>
+                            <li><a href="{{route('admin.recruitments.cacbaidangdoiduyet')}}"><i class="fa fa-circle-o"></i> Các bài đăng đợi duyệt</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -444,7 +444,8 @@
 
                 @endif
                 <li >
-                    <a href="#">
+                
+                    <a href=" @if(Auth::guard('employer')->check()) {{route('employer.index.thongtincanhan')}} @else #  @endif">
                         <i class="fa fa-gears"></i>
                         <span>Thông tin cá nhân</span>
                         <span class="pull-right-container">

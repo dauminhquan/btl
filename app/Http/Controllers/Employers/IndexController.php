@@ -44,4 +44,28 @@ class IndexController extends Controller
     {
         return Employers::findOrFail($id);
     }
+    public function get_tat_ca_don_ung_tuyen()
+    {
+        return view('template.tatcadonungtuyen');
+    }
+    public function get_henphongvan()
+    {
+        return view('template.henphongvan');
+    }
+    public function get_thongbaotunhantruong()
+    {
+        return view('template.thongbaotunhatruong');
+    }
+    public function get_thongbaotunhantruong_id($id)
+    {
+        return view('template.thongbaotunhatruong_id');
+    }
+    public function get_cacbaidangcuaban(){
+        return view('template.tatcabaidangcuaban');
+    }
+    
+    public function get_thongtincanhan(){
+        return view('template.thongtincanhandoanhnghiep');
+    }
+    
 }

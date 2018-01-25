@@ -32,6 +32,7 @@ Route::middleware('checkStudent')->prefix('student')->namespace('Students')->gro
 
         Route::get('cvbox',['as' => 'student.index.cvbox','uses' => 'IndexController@cvbox']);
         Route::get('cvbox/{id}',['as' => 'student.index.cvbox.id','uses' => 'IndexController@cvbox_id']);
+        Route::get('thongbao',['as' => 'student.index.thongbao','uses' => 'IndexController@thongbao']);
 
 });
 Route::get('login',['as' => 'login','uses' => 'Auth\LoginController@index']);
@@ -46,6 +47,14 @@ Route::middleware('checkEmployer')->prefix('employer')->namespace('Employers')->
     Route::get('/',['as' => 'employer.index.index','uses' => 'IndexController@index']);
     Route::get('new',['as' => 'employer.index.post_new','uses' => 'IndexController@post_new']);
     Route::post('new',['as' => 'employer.index.post_post_new','uses' => 'IndexController@post_post_new']);
+    Route::get('xem-tat-ca-don-ung-tuyen',['as'=> 'employer.index.xemtatcadonungtuyen','uses' => 'IndexController@get_tat_ca_don_ung_tuyen']);
+    Route::get('hen-phong-van',['as'=> 'employer.index.henphongvan','uses' => 'IndexController@get_henphongvan']);
+    Route::get('thong-bao-tu-nha-truong',['as'=> 'employer.index.thongbaotunhatruong','uses' => 'IndexController@get_thongbaotunhantruong']);
+    Route::get('thong-bao-tu-nha-truong/{id}',['as'=> 'employer.index.thongbaotunhatruong.id','uses' => 'IndexController@get_thongbaotunhantruong_id']);
+    Route::get('quan-ly-bai-dang',['as'=> 'employer.index.quanlybaidang','uses' => 'IndexController@get_cacbaidangcuaban']);
+    Route::get('thong-tin-ca-nhan',['as'=> 'employer.index.thongtincanhan','uses' => 'IndexController@get_thongtincanhan']);
+    
+    
     
     Route::get('{id}',['as' => 'employer.index.index.id','uses' => 'IndexController@index_id']);
     
@@ -56,6 +65,7 @@ Route::middleware('checkAdmin')->prefix('admin')->namespace('Admin')->group(func
     Route::get('/',['as' => 'admin.index','uses' => 'IndexController@index']);
     Route::get('/recruitments/wait',['as' => 'admin.recruitments.wait','uses' => 'IndexController@recruitments_wait']);
     Route::get('/recruitments/wait/{id}',['as' => 'admin.recruitments.wait.id','uses' => 'IndexController@recruitments_wait_id']);
+    Route::get('/cac-bai-dang-doi-duyet',['as' => 'admin.recruitments.cacbaidangdoiduyet','uses' => 'IndexController@cacbaidangdoiduyet']);
     
 });
 

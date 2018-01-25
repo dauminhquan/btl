@@ -43,4 +43,11 @@ class IndexController extends Controller
 
         return view('students.index.readmail',['data' => $data]);
     }
+    public function thongbao()
+    {
+        $rs = new RS();
+        $data = $rs->join('employers','recruitment_student.employer_id','=','employers.id')->select('recruitment_student.*','employers.name_company')->paginate(50);
+        return view('template.thongbaosinhvien',['data' => $data]);
+      
+    }
 }

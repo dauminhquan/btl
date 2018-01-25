@@ -36,7 +36,7 @@
                         <div class="box-body no-padding">
                             <ul class="nav nav-pills nav-stacked">
                                 <li><a href="{{route('student.index.sendcv')}}"><i class="fa fa-edit"></i>Ứng tuyển</a></li>
-                                <li><a href="#"><i class="fa fa-bullhorn"></i>Thông báo</a></li>
+                                <li><a href="{{route('student.index.thongbao')}}"><i class="fa fa-bullhorn"></i>Thông báo</a></li>
                                 <li><a href="{{route('student.index.cvbox')}}"><i class="fa fa-envelope-o"></i> Các đơn đã gửi</a></li>
                                 <li><a href="#"><i class="fa fa-file-text-o"></i> Đơn nháp</a></li>
                             
