@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Recruitments;
 use App\BranchRecruitment;
 use Illuminate\Support\Facades\Auth;
+use App\RecruitmentStudent as RS;
 class IndexController extends Controller
 {
     public function index()
@@ -48,8 +49,16 @@ class IndexController extends Controller
     {
         return view('template.tatcadonungtuyen');
     }
+    public function get_tat_ca_don_ung_tuyen_id($id)
+    {
+        $rs = new RS();
+        $data = $rs->where('recruitment_student.id','=',$id)->join('employers','recruitment_student.employer_id','=','employers.id')->select('recruitment_student.*','employers.name_company')->first();
+
+        return view('template.donungtuyen',['data' => $data]);
+    }
     public function get_henphongvan()
     {
+        
         return view('template.henphongvan');
     }
     public function get_thongbaotunhantruong()

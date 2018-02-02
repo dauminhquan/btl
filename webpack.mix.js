@@ -21,3 +21,4 @@ mix.js('resources/assets/js/Recruitments/index_id.js', 'public/js/recruiments');
 mix.js('resources/assets/js/Admin/index.js', 'public/js/admin');
 mix.js('resources/assets/js/Admin/list_recruitments_wait.js', 'public/js/admin');
 mix.js('resources/assets/js/Admin/list_recruitments_wait_id.js', 'public/js/admin');
+mix.js('resources/assets/js/Employers/cactintuyendungcuaban.js', 'public/js/employers');

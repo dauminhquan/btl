@@ -48,6 +48,7 @@ Route::middleware('checkEmployer')->prefix('employer')->namespace('Employers')->
     Route::get('new',['as' => 'employer.index.post_new','uses' => 'IndexController@post_new']);
     Route::post('new',['as' => 'employer.index.post_post_new','uses' => 'IndexController@post_post_new']);
     Route::get('xem-tat-ca-don-ung-tuyen',['as'=> 'employer.index.xemtatcadonungtuyen','uses' => 'IndexController@get_tat_ca_don_ung_tuyen']);
+    Route::get('don-ung-tuyen/{id}',['as'=> 'employer.index.xemtatcadonungtuyen.id','uses' => 'IndexController@get_tat_ca_don_ung_tuyen_id']);
     Route::get('hen-phong-van',['as'=> 'employer.index.henphongvan','uses' => 'IndexController@get_henphongvan']);
     Route::get('thong-bao-tu-nha-truong',['as'=> 'employer.index.thongbaotunhatruong','uses' => 'IndexController@get_thongbaotunhantruong']);
     Route::get('thong-bao-tu-nha-truong/{id}',['as'=> 'employer.index.thongbaotunhatruong.id','uses' => 'IndexController@get_thongbaotunhantruong_id']);
@@ -85,3 +86,4 @@ Route::post('employer/recruitments/add',['as' => 'employer.recruitments.add','us
 
 Route::get('recruitments',['as' => 'recruitments.index','uses' => 'Recruitments\IndexController@index']);
 Route::get('recruitments/{id}',['as' => 'recruitments.index.id','uses' => 'Recruitments\IndexController@index_id']);
+Route::get('dang-ky',['as' => 'dangky','uses' => 'Dangkycontroller@index']);

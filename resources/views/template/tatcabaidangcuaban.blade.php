@@ -24,5 +24,5 @@
 
 @endsection
 @section('js')
-<script src="{{asset('js/recruiments/index.js')}}"></script>
+<script src="{{asset('js/employers/cactintuyendungcuaban.js')}}"></script>
 @endsection
